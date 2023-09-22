@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./db/connect');
+const userRoute = require('./routes/user');
 
 const app = express();
 
@@ -20,6 +21,8 @@ connectDB.connect((err) => {
 app.get('/',(req,res)=>{
     res.send('Starting the Employee Management Project');
 });
+
+app.use('/user',userRoute);
 
 
 const port = 2222 || process.env.PORT;
