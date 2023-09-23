@@ -1,4 +1,5 @@
 const connectDB = require('../db/connect');
+const bcrypt = require('bcrypt');
 
 const adminLogin = (req,res)=>{
     const sql = "SELECT * FROM users WHERE email = ? and password = ?";
@@ -12,6 +13,33 @@ const adminLogin = (req,res)=>{
     })
 }
 
+const createEmployee = (req,res)=>{
+    const sql = "INSERT INTO employee (`id`,`name`,`email`,`password`,`address`,`salary`,`image`) VALUES(?)";
+    bcrypt.hash(req.body.password,10,(err,hash)=>{
+        if(err) return res.json({Error: "Error in hashing password"});
+
+        const values = [
+            req.body.id,
+            req.body.name,
+            req.body.email,
+            hash,
+            req.body.address,
+            req.body.salary,
+            req.file.filename
+        ];
+
+        connectDB.query(sql,[values],(err,result)=>{
+
+            if(err){
+                console.log(err);
+                return res.json({Error: "Inside signup query"});
+            }
+            return res.json({Status: "Success"});
+        })
+    })
+}
+
 module.exports = {
     adminLogin,
+    createEmployee
 }

@@ -1,7 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const {adminLogin} = require('../controllers/user');
+const { adminLogin, createEmployee } = require('../controllers/user');
+const multer = require('multer');
+const path = require('path');
 
-router.get('/login',adminLogin);
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
+    }
+})
+
+const upload = multer({
+    storage: storage
+})
+
+router.get('/login', adminLogin);
+router.post('/create', upload.single('image'), createEmployee)
 
 module.exports = router;
