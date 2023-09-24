@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { adminLogin, createEmployee,employeeLogin } = require('../controllers/user');
+const { adminLogin, createEmployee,employeeLogin, logoutUser } = require('../controllers/user');
 const multer = require('multer');
 const path = require('path');
 
@@ -20,5 +20,6 @@ const upload = multer({
 router.post('/login', adminLogin);
 router.post('/create', upload.single('image'), createEmployee);
 router.post('/employeeLogin',employeeLogin);
+router.get('/logout',logoutUser);
 
 module.exports = router;
