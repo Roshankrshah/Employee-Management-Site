@@ -1,8 +1,12 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-.start-container{
+body{
+    margin: 0px;
+}
+
+.start-container {
     margin-left: 40%;
     margin-top: 20%;
     width: 300px;
@@ -14,34 +18,34 @@
     border: 1px solid black;
 }
 
-.btn-container{
+.btn-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.btn{
+.btn {
     border: none;
     border-radius: 2px;
     padding: 10px;
-    color:white;
+    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.btn:hover{
+.btn:hover {
     transform: scale(1.1);
 }
 
-.employee-btn{
+.employee-btn {
     background-color: rgb(7, 165, 7);
 }
 
-.admin-btn{
+.admin-btn {
     background-color: rgb(30, 30, 225);
 }
 
-.login-container{
+.login-container {
     display: none;
     margin-left: 40%;
     margin-top: 10%;
@@ -52,6 +56,120 @@
     box-shadow: 1px 2px gray;
     border: 1px solid black;
 }
+
 .mb-3 {
     width: 300px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+
+.heading {
+    color: white;
+    font-size: 25px;
+    padding-left: 20px;
+}
+
+.links a {
+    display: block;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    padding: 1rem 1.5rem;
+    color: #fff;
+    transition: all 0.3s linear;
+}
+
+.links a:hover {
+    background: gray;
+    padding-left: 1.75rem;
+}
+
+.active {
+    background: gray;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: black;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 1rem;
+    transition: all 0.3s linear;
+    transform: translate(0);
+}
+
+.navbar{
+    background-color: slategray;
+    box-shadow: 5px 5px rgb(236, 235, 235);
+    height: 70px;
+}
+
+.navbar-title{
+    padding: 10px 10px;
+    margin-left: 300px;
+    text-align: center;
+}
+
+.navbar-title p{
+    font-size: 40px;
+    font-weight: 500px;
+    margin: 0px;
+}
+
+.content-container{
+    margin-left: 300px;
+    padding: 30px;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px;
+    border: 2px solid gray;
+    margin: 5px;
+    align-items: center;
+    font-weight: 500;
+    background-color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.box:hover {
+    background-color: rgb(69, 203, 158);
+}
+
+.inner-box {
+    padding: 5px;
+    font-size: 30px;
+}
+
+.inner-box-head{
+    font-size: 30px;
+}
+
+.hr-line{
+    width: 100%;
+    margin: 20px;
+    height: 2px;
+    background-color: black;
 }
