@@ -39,23 +39,20 @@ const route = (event) => {
     event.preventDefault();
 
     window.history.pushState({}, "", event.target.href);
-    console.log("1", event.target.href);
     urlLocationHandler();
 }
 
 const urlLocationHandler = async () => {
     const location = window.location.pathname;
-    console.log("2", location);
+    
     if (location.length == 0) {
         location = "/";
     }
 
     const route = routes[location] || routes['404'];
 
-    console.log(route);
     const html = await fetch(route.template).then((res) => res.text());
 
-    console.log(html);
     document.querySelector('.content-container').innerHTML = html;
 
     document.title = route.title;
