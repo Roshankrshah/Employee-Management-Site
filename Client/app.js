@@ -7,6 +7,7 @@ const passwordInput = document.getElementById('inputPassword');
 const loginBtn = document.querySelector('.login-btn');
 
 let url = 'http://localhost:2222/user/login';
+let redirect = '/Client/dashboard.html';
 
 adminBtn.addEventListener('click',()=>{
     startContainer.style.display = 'none';
@@ -17,6 +18,7 @@ employeeBtn.addEventListener('click',()=>{
     startContainer.style.display = 'none';
     loginContainer.style.display = 'block';
     url = 'http://localhost:2222/user/employeeLogin';
+    redirect = '/Client/employee.html';
 });
 
 loginBtn.addEventListener('click',async(e)=>{
@@ -31,11 +33,13 @@ loginBtn.addEventListener('click',async(e)=>{
         body: JSON.stringify(body),
         headers: {
             'Content-type': 'application/json'
-        }
+        },
+        credentials: 'include'
     });
     const resData = await res.json();
     if(resData.Status === 'Error'){
         alert(resData.Error+ ' Try Again');
     }
-    window.location.href = '/Client/dashboard.html';
+    alert(document.cookie);
+    window.location.href = redirect;
 })
