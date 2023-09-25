@@ -6,7 +6,9 @@ const {
     createEmployee, 
     employeeLogin, 
     logoutUser,
-    adminCount } = require('../controllers/user');
+    adminCount,
+    employeeCount,
+    salarySum } = require('../controllers/user');
 
 const multer = require('multer');
 const path = require('path');
@@ -43,6 +45,8 @@ router.post('/login', adminLogin);
 router.post('/create', upload.single('image'), createEmployee);
 router.post('/employeeLogin', employeeLogin);
 router.get('/logout', logoutUser);
-router.get('/adminCount',verifyUser,adminCount);
+router.get('/adminCount',verifyUser,adminCount)
+router.get('/employeeCount',verifyUser,employeeCount)
+router.get('/salarySum',verifyUser,salarySum);
 
 module.exports = router;

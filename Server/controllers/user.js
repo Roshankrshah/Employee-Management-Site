@@ -96,10 +96,28 @@ const adminCount = (req, res) => {
     })
 }
 
+const employeeCount = (req, res) => {
+    const sql = "Select count(id) as employee from employee";
+    connectDB.query(sql, (err, result) => {
+        if(err) return res.json({Error: "Error in running query"});
+        return res.json(result);
+    })
+}
+
+const salarySum = (req, res) => {
+    const sql = "Select sum(salary) as sumOfSalary from employee";
+    connectDB.query(sql, (err, result) => {
+        if(err) return res.json({Error: "Error in running query"});
+        return res.json(result);
+    })
+}
+
 module.exports = {
     adminLogin,
     createEmployee,
     employeeLogin,
     logoutUser,
-    adminCount
+    adminCount,
+    employeeCount,
+    salarySum
 }
