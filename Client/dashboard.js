@@ -1,22 +1,34 @@
 const logoutBtn = document.querySelector('.logout-btn');
+const linkContainer = document.querySelector('.links');
+const links = document.querySelectorAll('li');
 
-logoutBtn.addEventListener('click',async()=>{
-    console.log(document.cookie)
-    const res = await fetch('http://localhost:2222/user/logout',{
-                credentials: 'include'
+import fetchDashboard from './templates/index.js';
+
+logoutBtn.addEventListener('click', async () => {
+    const res = await fetch('http://localhost:2222/user/logout', {
+        credentials: 'include'
     });
     const resData = await res.json();
-    if(resData.Status === 'Success'){
+    if (resData.Status === 'Success') {
         alert('logout');
     }
 });
 
-const start = async()=>{
-    const res = await fetch('http://localhost:2222/user/adminCount',{
-        credentials: 'include'
+linkContainer.addEventListener('click', (e) => {
+    links.forEach((link) => {
+        link.classList.remove('active');
     });
-    const resData = await res.json();
-    console.log(resData);
-}
+    e.target.parentElement.classList.add('active');
+    const routeJs = e.target.textContent;
 
-start();
+    if (routeJs === 'DashBoard') {
+        fetchDashboard();
+    }
+    if (routeJs === 'Manage Employees') {
+    }
+    if (routeJs === 'Profile') {
+
+    }
+});
+
+fetchDashboard();

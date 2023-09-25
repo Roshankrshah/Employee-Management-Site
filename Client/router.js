@@ -44,14 +44,16 @@ const route = (event) => {
 
 const urlLocationHandler = async () => {
     const location = window.location.pathname;
-    
+
     if (location.length == 0) {
         location = "/";
     }
 
     const route = routes[location] || routes['404'];
 
-    const html = await fetch(route.template).then((res) => res.text());
+    const html = await fetch(route.template).then((res) => {
+        return res.text();
+    });
 
     document.querySelector('.content-container').innerHTML = html;
 
