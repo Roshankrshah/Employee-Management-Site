@@ -7,6 +7,15 @@ const adminLogin = (req, res) => {
     connectDB.query(sql, [req.body.email, req.body.password], (err, result) => {
         if (err) return res.json({ Status: "Error", Error: "Error in running query" });
         if (result.length > 0) {
+            const id = result[0].id;
+            const token = jwt.sign({ role: "admin" }, process.env.JWT_SEC, { expiresIn: '1d' });
+            res.cookie('token', token, {
+                path: "/",
+                expires: new Date(Date.now() + 1000 * 86400),
+                sameSite: 'None',
+                httpOnly: false,
+                secure: true
+            });
             return res.json({ Status: 'Success' })
         } else {
             return res.json({ Status: 'Error', Error: 'Wrong Email or Password' });
@@ -50,7 +59,13 @@ const employeeLogin = (req, res) => {
                 if (err) return res.json({ Error: "Invalid Credentials" });
                 if (response) {
                     const token = jwt.sign({ role: "employee", id: result[0].id }, process.env.JWT_SEC, { expiresIn: '1d' });
-                    res.cookie('token', token);
+                    res.cookie('token', token, {
+                        path: "/",
+                        expires: new Date(Date.now() + 1000 * 86400),
+                        sameSite: 'None',
+                        httpOnly: false,
+                        secure: true
+                    });
                     return res.json({ Status: "Success", id: result[0].id });
                 } else {
                     return res.json({ Status: "Error", Error: "Wrong Email or Password" });
@@ -62,14 +77,29 @@ const employeeLogin = (req, res) => {
     })
 }
 
-const logoutUser = async (req, res) => {
-    res.clearCookie('token');
+const logoutUser = (req, res) => {
+    res.cookie("token","",{
+        path: "/",
+        httpOnly: true,
+        expires: new Date(0),
+        sameSite: "None",
+        secure: true
+    });
     return res.json({ Status: "Success" });
+}
+
+const adminCount = (req, res) => {
+    const sql = "Select count(id) as admin from users";
+    connectDB.query(sql, (err, result) => {
+        if (err) return res.json({ Error: "Error in running query" });
+        return res.json(result);
+    })
 }
 
 module.exports = {
     adminLogin,
     createEmployee,
     employeeLogin,
-    logoutUser
+    logoutUser,
+    adminCount
 }

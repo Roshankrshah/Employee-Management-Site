@@ -7,7 +7,11 @@ const userRoute = require('./routes/user');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    methods: ['GET','POST','PATCH','DELETE'],
+    origin: true,
+    credentials: true
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.static('public'));

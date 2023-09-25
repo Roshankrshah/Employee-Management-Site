@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { adminLogin, createEmployee,employeeLogin, logoutUser } = require('../controllers/user');
+const jwt = require('jsonwebtoken');
+const { 
+    adminLogin, 
+    createEmployee, 
+    employeeLogin, 
+    logoutUser,
+    adminCount } = require('../controllers/user');
+
 const multer = require('multer');
 const path = require('path');
 
@@ -15,11 +22,27 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage
-})
+});
+
+const verifyUser = (req, res, next) => {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.json({ Error: "You are no Authenticated" });
+    } else {
+        jwt.verify(token, process.env.JWT_SEC, (err, decoded) => {
+            if (err) return res.json({ Error: "Token wrong" });
+            req.role = decoded.role;
+            req.id = decoded.id;
+            next();
+        })
+    }
+};
+
 
 router.post('/login', adminLogin);
 router.post('/create', upload.single('image'), createEmployee);
-router.post('/employeeLogin',employeeLogin);
-router.get('/logout',logoutUser);
+router.post('/employeeLogin', employeeLogin);
+router.get('/logout', logoutUser);
+router.get('/adminCount',verifyUser,adminCount);
 
 module.exports = router;
