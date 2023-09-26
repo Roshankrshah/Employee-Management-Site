@@ -112,6 +112,14 @@ const salarySum = (req, res) => {
     })
 }
 
+const getAllEmployee = (req, res) => {
+    const sql = "SELECT * FROM employee";
+    connectDB.query(sql, (err, result) => {
+        if(err) return res.json({Error: "Get employee error in sql"});
+        return res.json({Status: "Success", Result: result})
+    })
+}
+
 module.exports = {
     adminLogin,
     createEmployee,
@@ -119,5 +127,6 @@ module.exports = {
     logoutUser,
     adminCount,
     employeeCount,
-    salarySum
+    salarySum,
+    getAllEmployee
 }
