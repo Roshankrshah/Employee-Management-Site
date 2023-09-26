@@ -3,6 +3,7 @@ const linkContainer = document.querySelector('.links');
 const links = document.querySelectorAll('li');
 
 import fetchDashboard from './templates/index.js';
+import fetchEmployeeDetails from './templates/manage.js';
 
 logoutBtn.addEventListener('click', async () => {
     const res = await fetch('http://localhost:2222/user/logout', {
@@ -25,7 +26,8 @@ linkContainer.addEventListener('click', (e) => {
         fetchDashboard();
     }
     if (routeJs === 'Manage Employees') {
-    }
+        fetchEmployeeDetails();
+    }   
     if (routeJs === 'Profile') {
 
     }
