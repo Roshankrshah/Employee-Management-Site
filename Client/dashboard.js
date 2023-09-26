@@ -12,6 +12,7 @@ logoutBtn.addEventListener('click', async () => {
     const resData = await res.json();
     if (resData.Status === 'Success') {
         alert('logout');
+        location.href = '/Client/index.html';
     }
 });
 

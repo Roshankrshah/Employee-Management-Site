@@ -40,6 +40,5 @@ loginBtn.addEventListener('click',async(e)=>{
     if(resData.Status === 'Error'){
         alert(resData.Error+ ' Try Again');
     }
-    alert(document.cookie);
     window.location.href = redirect;
 })
