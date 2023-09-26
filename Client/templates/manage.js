@@ -16,12 +16,13 @@ const fetchEmployeeDetails = async () => {
             <td>${employee.address}</td>
             <td>${employee.salary}</td>
             <td>
-                <button class="edit-btn">Edit</button>
+                <button class="edit-btn" data-id="${employee.id}" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
                 <button class="delete-btn" data-id="${employee.id}">Delete</button>
             </td>`;
         newRow.innerHTML = data;
         employeeTable.appendChild(newRow);
     });
+
     const createNewEmployee = document.querySelector('.create-btn');
     createNewEmployee.addEventListener('click', async (e) => {
         e.preventDefault();
@@ -59,18 +60,65 @@ const fetchEmployeeDetails = async () => {
     const deleteBtns = document.querySelectorAll('.delete-btn');
     deleteBtns.forEach((deleteBtn) => {
         deleteBtn.addEventListener('click', async (e) => {
-            console.log('delete', e.target.dataset.id);
-            const res = await fetch(`http://localhost:2222/user/delete/${e.target.dataset.id}`,{
+            const res = await fetch(`http://localhost:2222/user/delete/${e.target.dataset.id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
             const resData = await res.json();
-            if(resData.Error){
+            if (resData.Error) {
                 alert('Error Occurred');
             }
             alert('Employee Removed');
         })
-    })
+    });
+
+    const editBtns = document.querySelectorAll('.edit-btn');
+    editBtns.forEach((editBtn) => {
+        editBtn.addEventListener('click', async (e) => {
+            console.log('edit ', e.target.dataset.id);
+            const res = await fetch(`http://localhost:2222/user/getSingleEmployee/${e.target.dataset.id}`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+            const resData = await res.json();
+            console.log(resData);
+
+            document.getElementById('editId').value = resData.Result[0].id;
+            document.getElementById('editName').value = resData.Result[0].name;
+            document.getElementById('editEmail').value = resData.Result[0].email;
+            document.getElementById('editSalary').value = resData.Result[0].salary;
+        })
+    });
+
+
+    const updateEmployee = document.querySelector('.update-btn');
+    updateEmployee.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const salary = parseInt(document.querySelector('#editSalary').value);
+
+        const id = document.querySelector('#editId').value;
+
+        const body = {
+            salary: salary
+        }
+        const res = await fetch(`http://localhost:2222/user/update/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        });
+
+        const resData = await res.json();
+        console.log(resData);
+        if(resData.Error){
+            alert('Error Occurred');
+        }else{
+            confirm('Employee Details Updated');
+        }
+    });
+
 }
 
 export default fetchEmployeeDetails;

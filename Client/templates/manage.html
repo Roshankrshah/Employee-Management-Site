@@ -50,6 +50,38 @@
     </div>
 </div>
 
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editModalLabel">Update Employee Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="editId" class="form-label">Employee ID</label>
+                        <input type="text" class="form-control" id="editId" disabled readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editName" disabled readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="editEmail" disabled readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editSalary" class="form-label">Salary</label>
+                        <input type="number" class="form-control" id="editSalary">
+                    </div>
+                </form>
+                <button class="btn btn-primary update-btn">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table class="employee-table">
     <tr>
         <th>Employee Id</th>

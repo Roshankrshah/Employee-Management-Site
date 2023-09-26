@@ -129,6 +129,25 @@ const deleteEmployee = async (req, res) => {
     })
 }
 
+const getSingleEmployee = async(req, res) => {
+    const id = parseInt(req.params.id);
+    const sql = "SELECT * FROM employee where id = ?";
+    connectDB.query(sql, [id], (err, result) => {
+        if(err) return res.json({Error: "Get employee error in sql"});
+        return res.json({Status: "Success", Result: result})
+    })
+}
+
+const update = async (req, res) => {
+    const id = parseInt(req.params.id);
+    const salary = parseInt(req.body.salary);
+    const sql = "UPDATE employee set salary = ? WHERE id = ?";
+    connectDB.query(sql, [salary, id], (err, result) => {
+        if(err) return res.json({Error: "update employee error in sql" ,});
+        return res.json({Status: "Success"})
+    })
+}
+
 module.exports = {
     adminLogin,
     createEmployee,
@@ -138,5 +157,7 @@ module.exports = {
     employeeCount,
     salarySum,
     getAllEmployee,
-    deleteEmployee
+    deleteEmployee,
+    getSingleEmployee,
+    update
 }
