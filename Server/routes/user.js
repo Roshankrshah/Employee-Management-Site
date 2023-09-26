@@ -9,7 +9,8 @@ const {
     adminCount,
     employeeCount,
     salarySum,
-    getAllEmployee } = require('../controllers/user');
+    getAllEmployee,
+    deleteEmployee } = require('../controllers/user');
 
 const multer = require('multer');
 const path = require('path');
@@ -50,5 +51,6 @@ router.get('/adminCount',verifyUser,adminCount)
 router.get('/employeeCount',verifyUser,employeeCount)
 router.get('/salarySum',verifyUser,salarySum);
 router.get('/getEmployee',verifyUser,getAllEmployee)
+router.delete('/delete/:id',verifyUser,deleteEmployee);
 
 module.exports = router;

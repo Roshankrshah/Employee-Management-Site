@@ -17,7 +17,7 @@ const fetchEmployeeDetails = async () => {
             <td>${employee.salary}</td>
             <td>
                 <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
+                <button class="delete-btn" data-id="${employee.id}">Delete</button>
             </td>`;
         newRow.innerHTML = data;
         employeeTable.appendChild(newRow);
@@ -55,6 +55,22 @@ const fetchEmployeeDetails = async () => {
         }
 
     });
+
+    const deleteBtns = document.querySelectorAll('.delete-btn');
+    deleteBtns.forEach((deleteBtn) => {
+        deleteBtn.addEventListener('click', async (e) => {
+            console.log('delete', e.target.dataset.id);
+            const res = await fetch(`http://localhost:2222/user/delete/${e.target.dataset.id}`,{
+                method: 'DELETE',
+                credentials: 'include'
+            });
+            const resData = await res.json();
+            if(resData.Error){
+                alert('Error Occurred');
+            }
+            alert('Employee Removed');
+        })
+    })
 }
 
 export default fetchEmployeeDetails;

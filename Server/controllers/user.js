@@ -120,6 +120,15 @@ const getAllEmployee = (req, res) => {
     })
 }
 
+const deleteEmployee = async (req, res) => {
+    const id = parseInt(req.params.id);
+    const sql = "Delete FROM employee WHERE id = ?";
+    connectDB.query(sql, [id], (err, result) => {
+        if(err) return res.json({Error: "delete employee error in sql"});
+        return res.json({Status: "Success"})
+    })
+}
+
 module.exports = {
     adminLogin,
     createEmployee,
@@ -128,5 +137,6 @@ module.exports = {
     adminCount,
     employeeCount,
     salarySum,
-    getAllEmployee
+    getAllEmployee,
+    deleteEmployee
 }
