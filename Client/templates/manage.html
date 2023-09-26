@@ -1,5 +1,55 @@
 <h1>Employee List</h1>
-<button class="add-emp-btn">Add Employee</button>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary add-emp-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Employee
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Employee Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="inputId" class="form-label">Employee ID</label>
+                        <input type="text" class="form-control" id="inputId">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="inputName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="text" class="form-control" id="inputPassword">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputSalary" class="form-label">Salary</label>
+                        <input type="number" class="form-control" id="inputSalary">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputAddress" class="form-label">Address</label>
+                        <textarea class="form-control" id="inputAddress" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Photo</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                </form>
+                <button class="btn btn-primary create-btn">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table class="employee-table">
     <tr>
         <th>Employee Id</th>

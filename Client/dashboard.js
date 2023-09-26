@@ -27,7 +27,7 @@ linkContainer.addEventListener('click', (e) => {
     }
     if (routeJs === 'Manage Employees') {
         fetchEmployeeDetails();
-    }   
+    }
     if (routeJs === 'Profile') {
 
     }

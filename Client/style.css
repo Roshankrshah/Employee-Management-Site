@@ -114,7 +114,7 @@ a {
     transform: translate(0);
 }
 
-.navbar {
+.navBar {
     background-color: slategray;
     box-shadow: 5px 5px rgb(236, 235, 235);
     height: 70px;
@@ -197,7 +197,7 @@ tr:hover {
     background-color: azure;
 }
 
-.add-emp-btn{
+.add-emp-btn {
     border: none;
     background-color: green;
     color: white;
@@ -205,7 +205,7 @@ tr:hover {
     transition: all 0.3s ease;
 }
 
-.add-emp-btn:hover{
+.add-emp-btn:hover {
     background-color: rgb(2, 161, 2);
     transform: scale(1.1);
 }
@@ -244,6 +244,3 @@ tr:hover {
 .img-container {
     text-align: center;
 }
-
-
-
