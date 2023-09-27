@@ -20,6 +20,7 @@ const start = async () => {
 
     const resData = await res.json();
     console.log(resData);
+    document.querySelector('.profile-image').src = `../Server/public/images/${resData.Result[0].image}`;
     document.getElementById('editId').value = resData.Result[0].id;
     document.getElementById('editName').value = resData.Result[0].name;
     document.getElementById('editEmail').value = resData.Result[0].email;
