@@ -244,3 +244,33 @@ tr:hover {
 .img-container {
     text-align: center;
 }
+
+.btn-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.save-btn{
+    background-color: blue;
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover{
+    background-color: rgb(73, 73, 246);
+}
+
+.logout-emp-btn{
+    background-color: red;
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.logout-emp-btn:hover{
+    background-color: rgb(255, 82, 82);
+}

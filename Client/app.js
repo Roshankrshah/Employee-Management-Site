@@ -36,9 +36,12 @@ loginBtn.addEventListener('click',async(e)=>{
         },
         credentials: 'include'
     });
+
     const resData = await res.json();
+
     if(resData.Status === 'Error'){
         alert(resData.Error+ ' Try Again');
+    }else{
+        window.location.href = redirect + `?id=${resData.id}`;
     }
-    window.location.href = redirect;
 })
