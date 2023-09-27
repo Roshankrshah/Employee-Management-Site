@@ -11,7 +11,9 @@ const fetchEmployeeDetails = async () => {
         const data = `
             <td>${employee.id}</td>
             <td>${employee.name}</td>
-            <td>${employee.image}</td>
+            <td>
+                <img src="../Server/public/images/${employee.image}" alt="not available" class="dp-image">    
+            </td>
             <td>${employee.email}</td>
             <td>${employee.address}</td>
             <td>${employee.salary}</td>

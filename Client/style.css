@@ -274,3 +274,10 @@ tr:hover {
 .logout-emp-btn:hover{
     background-color: rgb(255, 82, 82);
 }
+
+.dp-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
