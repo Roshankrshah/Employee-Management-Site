@@ -4,6 +4,9 @@ const links = document.querySelectorAll('li');
 
 import fetchDashboard from './templates/index.js';
 import fetchEmployeeDetails from './templates/manage.js';
+import fetchAdminDetails from './templates/profile.js';
+
+const id = location.href.split('?')[1].split('=')[1];
 
 logoutBtn.addEventListener('click', async () => {
     const res = await fetch('http://localhost:2222/user/logout', {
@@ -30,7 +33,7 @@ linkContainer.addEventListener('click', (e) => {
         fetchEmployeeDetails();
     }
     if (routeJs === 'Profile') {
-
+        fetchAdminDetails(id);
     }
 });
 

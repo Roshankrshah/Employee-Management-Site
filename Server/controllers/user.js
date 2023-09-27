@@ -16,7 +16,7 @@ const adminLogin = (req, res) => {
                 httpOnly: false,
                 secure: true
             });
-            return res.json({ Status: 'Success' })
+            return res.json({ Status: 'Success', id: result[0].id })
         } else {
             return res.json({ Status: 'Error', Error: 'Wrong Email or Password' });
         }
@@ -78,7 +78,7 @@ const employeeLogin = (req, res) => {
 }
 
 const logoutUser = (req, res) => {
-    res.cookie("token","",{
+    res.cookie("token", "", {
         path: "/",
         httpOnly: true,
         expires: new Date(0),
@@ -99,7 +99,7 @@ const adminCount = (req, res) => {
 const employeeCount = (req, res) => {
     const sql = "Select count(id) as employee from employee";
     connectDB.query(sql, (err, result) => {
-        if(err) return res.json({Error: "Error in running query"});
+        if (err) return res.json({ Error: "Error in running query" });
         return res.json(result);
     })
 }
@@ -107,7 +107,7 @@ const employeeCount = (req, res) => {
 const salarySum = (req, res) => {
     const sql = "Select sum(salary) as sumOfSalary from employee";
     connectDB.query(sql, (err, result) => {
-        if(err) return res.json({Error: "Error in running query"});
+        if (err) return res.json({ Error: "Error in running query" });
         return res.json(result);
     })
 }
@@ -115,8 +115,8 @@ const salarySum = (req, res) => {
 const getAllEmployee = (req, res) => {
     const sql = "SELECT * FROM employee";
     connectDB.query(sql, (err, result) => {
-        if(err) return res.json({Error: "Get employee error in sql"});
-        return res.json({Status: "Success", Result: result})
+        if (err) return res.json({ Error: "Get employee error in sql" });
+        return res.json({ Status: "Success", Result: result })
     })
 }
 
@@ -124,17 +124,17 @@ const deleteEmployee = async (req, res) => {
     const id = parseInt(req.params.id);
     const sql = "Delete FROM employee WHERE id = ?";
     connectDB.query(sql, [id], (err, result) => {
-        if(err) return res.json({Error: "delete employee error in sql"});
-        return res.json({Status: "Success"})
+        if (err) return res.json({ Error: "delete employee error in sql" });
+        return res.json({ Status: "Success" })
     })
 }
 
-const getSingleEmployee = async(req, res) => {
+const getSingleEmployee = async (req, res) => {
     const id = parseInt(req.params.id);
     const sql = "SELECT * FROM employee where id = ?";
     connectDB.query(sql, [id], (err, result) => {
-        if(err) return res.json({Error: "Get employee error in sql"});
-        return res.json({Status: "Success", Result: result})
+        if (err) return res.json({ Error: "Get employee error in sql" });
+        return res.json({ Status: "Success", Result: result })
     })
 }
 
@@ -143,8 +143,17 @@ const update = async (req, res) => {
     const salary = parseInt(req.body.salary);
     const sql = "UPDATE employee set salary = ? WHERE id = ?";
     connectDB.query(sql, [salary, id], (err, result) => {
-        if(err) return res.json({Error: "update employee error in sql" ,});
-        return res.json({Status: "Success"})
+        if (err) return res.json({ Error: "update employee error in sql", });
+        return res.json({ Status: "Success" })
+    })
+}
+
+const adminDetails = async (req, res) => {
+    const id = parseInt(req.params.id);
+    const sql = "SELECT * FROM users where id = ?";
+    connectDB.query(sql, [id], (err, result) => {
+        if (err) return res.json({ Error: "Get admin error in sql" });
+        return res.json({ Status: "Success", Result: result })
     })
 }
 
@@ -159,5 +168,6 @@ module.exports = {
     getAllEmployee,
     deleteEmployee,
     getSingleEmployee,
-    update
+    update,
+    adminDetails
 }
