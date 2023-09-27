@@ -53,8 +53,8 @@ const fetchEmployeeDetails = async () => {
                 credentials: 'include'
             });
         } catch (error) {
-            confirm('New Employee Added');
-            location.href = '/Client/dashboard.html';
+            alert('New Employee Added');
+            window.location.href = '/Client/dashboard.html';
         }
 
     });
